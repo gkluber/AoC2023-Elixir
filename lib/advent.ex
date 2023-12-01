@@ -3,6 +3,8 @@ defmodule Advent do
 
   def start(_type, _args) do
     data_files = Path.wildcard(File.cwd! <> "/data/*.txt")
+
+    # Extract day number from the file names
     files_and_days = Enum.map(data_files, fn path ->
       {day_location, day_len} = :binary.match(path, "day_")
       num_start = day_location + day_len
@@ -12,18 +14,14 @@ defmodule Advent do
       {path, num}
     end)
 
-    IO.puts(inspect data_files)
-    IO.puts(inspect files_and_days)
-
+    # Sort based on that number
     Enum.sort(files_and_days, fn {_path, num}, {_path2, num2} -> num < num2 end)
-
     sorted = Enum.map(files_and_days, fn {path, _day} -> path end)
+    lines_sets = Enum.map(sorted, fn path -> File.read!(path) |> String.split(~r/\r?\n/) |> Enum.drop(-1) end)
 
-    lines_sets = Enum.map(sorted, fn path -> File.stream!(path) end)
-
-    IO.puts(inspect lines_sets)
-
-    IO.puts(Day1.solution(Enum.to_list(Enum.at(lines_sets, 0))))
+    day1_data = Enum.at(lines_sets, 0)
+    IO.puts(day1_data |> Day1.solution1)
+    IO.puts(day1_data |> Day1.solution2)
 
     Task.start(fn -> :timer.sleep(1000); IO.puts("done sleeping") end)
   end
