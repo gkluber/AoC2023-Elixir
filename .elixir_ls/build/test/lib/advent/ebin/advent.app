@@ -1,6 +1,7 @@
 {application,advent,
              [{applications,[kernel,stdlib,elixir,logger]},
               {description,"advent"},
-              {modules,['Elixir.Advent']},
+              {modules,['Elixir.Advent','Elixir.Day1']},
               {registered,[]},
-              {vsn,"0.1.0"}]}.
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.Advent',[]}}]}.
