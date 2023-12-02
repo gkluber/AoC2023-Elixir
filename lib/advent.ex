@@ -14,14 +14,19 @@ defmodule Advent do
       {path, num}
     end)
 
+    IO.puts(inspect files_and_days)
+
     # Sort based on that number
     Enum.sort(files_and_days, fn {_path, num}, {_path2, num2} -> num < num2 end)
     sorted = Enum.map(files_and_days, fn {path, _day} -> path end)
     lines_sets = Enum.map(sorted, fn path -> File.read!(path) |> String.split(~r/\r?\n/) |> Enum.drop(-1) end)
 
     day1_data = Enum.at(lines_sets, 0)
-    IO.puts(day1_data |> Day1.solution1)
-    IO.puts(day1_data |> Day1.solution2)
+    IO.puts("Day 1 solution 1: " <> Integer.to_string(day1_data |> Day1.solution1))
+    IO.puts("Day 1 solution 2: " <> Integer.to_string(day1_data |> Day1.solution2))
+
+    day2_data = Enum.at(lines_sets, 1)
+    IO.puts("Day 2 solution 1: " <> Integer.to_string(day2_data |> Day2.solution1))
 
     Task.start(fn -> :timer.sleep(1000); IO.puts("done sleeping") end)
   end
