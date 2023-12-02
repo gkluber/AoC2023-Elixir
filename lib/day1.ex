@@ -13,16 +13,16 @@ defmodule Day1 do
   def solution2(lines) do
     word_map = fn(text) ->
       case text do
-        "one" -> 1
-        "two" -> 2
-        "three" -> 3
-        "four" -> 4
-        "five" -> 5
-        "six" -> 6
-        "seven" -> 7
-        "eight" -> 8
-        "nine" -> 9
-        _ -> 0
+        "one" <> _ -> "1"
+        "two" <> _ -> "2"
+        "three" <> _ -> "3"
+        "four" <> _ -> "4"
+        "five" <> _ -> "5"
+        "six" <> _ -> "6"
+        "seven" <> _ -> "7"
+        "eight" <> _ -> "8"
+        "nine" <> _ -> "9"
+        _ -> ""
       end
     end
 
@@ -33,9 +33,17 @@ defmodule Day1 do
       chars_substrings = chars_enumerate |> Enum.map(fn {idx, char} ->
         [char, Enum.join(Enum.slice(chars, idx, len))]
       end )
-
-      IO.puts(inspect chars_substrings)
-
+      numbers_strings = chars_substrings |> Enum.map(fn [char, substring] ->
+        case Integer.parse(char) do
+          {val, _} -> Integer.to_string(val)
+          :error -> word_map.(substring)
+        end
+      end)
+      big_fat_numbers = Enum.join(numbers_strings) |> String.graphemes()
+      case Integer.parse(List.first(big_fat_numbers) <> List.last(big_fat_numbers)) do
+        {val, _} -> val
+        :error -> raise("Piss")
+      end
     end ) |> Enum.sum
   end
 end
