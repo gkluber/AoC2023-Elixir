@@ -27,6 +27,7 @@ defmodule Advent do
 
     day2_data = Enum.at(lines_sets, 1)
     IO.puts("Day 2 solution 1: " <> Integer.to_string(day2_data |> Day2.solution1))
+    IO.puts("Day 2 solution 2: " <> Integer.to_string(day2_data |> Day2.solution2))
 
     Task.start(fn -> :timer.sleep(1000); IO.puts("done sleeping") end)
   end

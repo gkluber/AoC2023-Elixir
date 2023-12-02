@@ -40,4 +40,40 @@ defmodule Day2 do
 
     answer
   end
+
+  def solution2(lines) do
+    game_powers = Enum.map(lines, fn line ->
+      game = String.split(line, ":")
+      {game_id, _} = Integer.parse(Enum.at(game, 0) |> String.split(~r/\s/) |> Enum.at(1))
+
+      game_info = Enum.at(game, 1)
+      runs = String.split(game_info, ";")
+      dice = Enum.map(runs, fn run ->
+        Enum.map(String.split(run, ","), fn die ->
+          String.trim(die) |> String.split(~r/\s/)
+        end)
+        # runs :: [dice :: [{str_num, color}]] -- join these runs
+      end) |> Enum.reduce([], fn dice, acc ->
+        dice ++ acc
+      end)
+
+      maxes = Enum.map(dice, fn die ->
+        [str_num, color] = die
+        {num, _} = Integer.parse(str_num)
+        {color, num}
+      end) |> Enum.reduce(%{}, fn {color, num}, acc ->
+        case Map.fetch(acc, color) do
+          {:ok, cur_num} -> Map.put(acc, color, max(cur_num, num))
+          :error -> Map.put(acc, color, num)
+        end
+      end)
+
+      power = Enum.reduce(Map.values(maxes), 1, fn x, acc -> x*acc end)
+      power
+    end)
+
+    answer = Enum.sum(game_powers)
+
+    answer
+  end
 end
