@@ -38,6 +38,7 @@ defmodule Advent do
       end)
     end)
 
+    # Needed for `mix run` command
     Task.start(fn -> :timer.sleep(1000); IO.puts("done sleeping") end)
   end
 end
