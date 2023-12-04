@@ -1,6 +1,6 @@
 # AoC2023-Elixir
 
-My Advent of Code 2023 solutions, through which I learned programming in Elixir.
+My Advent of Code 2023 solutions, through which I learned programming in Elixir. Not sure what Advent of Code is? Check it out on the official website! [https://adventofcode.com/](https://adventofcode.com/)
 
 ### Why Elixir?
 
