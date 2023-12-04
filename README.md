@@ -1,4 +1,4 @@
-# Advent
+# AoC2023-Elixir
 
 My Advent of Code 2023 solutions, through which I learned programming in Elixir.
 
