@@ -1,21 +1,23 @@
 # Advent
 
-**TODO: Add description**
+My Advent of Code 2023 solutions, through which I learned programming in Elixir.
+
+### Why Elixir?
+
+In terms of other languages I've learned, Elixir is like a fusion between Python and Haskell. I went from being frustrated at the lack of typing to being amazed at the Pythonic levels of flexibility. Elixir also has the advantage of being backwards-compatible with Erlang, as Kotlin is to Java, so there is a massive standard library you can access. 
+
+There are many more reasons to program with Elixir in 2023 too, such as the concurrency-oriented *supervision trees* that give rise to robust, scalable cooperative multithreading (coroutine) patterns, and the fact that Elixir runs in a VM, making it portable by default without the need for Docker/Singularity containers.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `advent` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:advent, "~> 0.1.0"}
-  ]
-end
+Run the following command to install dependencies:
+```bash
+mix do deps.get, deps.compile
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/advent>.
+To run the code, use the following command:
+```bash
+mix run
+```
+This will generate an executable app
 

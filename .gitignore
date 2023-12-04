@@ -25,4 +25,11 @@ advent-*.tar
 # Temporary files, for example, from tests.
 /tmp/
 
+# Elixir build junk
 /.elixir_ls/
+
+# VSCode project configuration
+/.vscode/
+
+# VSCode file locks
+*.lock
