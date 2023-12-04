@@ -6,10 +6,12 @@ defmodule Day3 do
     end)
     totally_indexed_lines = Enum.zip(0..(length(indexed_lines)-1), indexed_lines)
 
-    IO.puts(inspect totally_indexed_lines)
+    #IO.puts(inspect totally_indexed_lines)
 
     solution = Enum.map(totally_indexed_lines, fn [line_idx, [char_idx, char]] ->
       :idk
     end)
+
+    solution
   end
 end
