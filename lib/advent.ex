@@ -23,7 +23,7 @@ defmodule Advent do
 
     num_days = length(lines_sets)
 
-    modules = [Day1, Day2, Day3, Day4]
+    modules = [Day1, Day2, Day3, Day4, Day5]
     indexed_modules = Enum.zip([0..(num_days-1), modules, lines_sets])
 
     # Run the input data on functions of each day

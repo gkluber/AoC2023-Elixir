@@ -45,9 +45,6 @@ defmodule Day4 do
       Map.put(acc, x, 1)
     end)
 
-    IO.puts(inspect scratchcards)
-    IO.puts(Enum.join(points, " "))
-
     total_cards = Enum.reduce(Enum.zip(0..(num_cards-1), points), scratchcards, fn {idx, wins}, acc ->
       num_cards = Map.get(acc, idx)
       if wins == 0 do
@@ -59,8 +56,6 @@ defmodule Day4 do
         end)
       end
     end)
-
-    IO.puts(inspect total_cards)
 
     answer = Enum.sum(Map.values(total_cards))
 
