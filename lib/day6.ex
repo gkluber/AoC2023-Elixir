@@ -13,7 +13,7 @@ defmodule Day6 do
 
     races = Enum.zip(time, distance)
 
-    scores = Enum.map(races, fn {time, dist} ->
+    Enum.map(races, fn {time, dist} ->
       possible = 0..time
       Enum.filter(possible, fn t ->
         ms = t
@@ -22,5 +22,24 @@ defmodule Day6 do
         total_dist > dist
       end) |> length
     end) |> Enum.product
+  end
+
+  def solution2(lines) do
+    parsed = Enum.map(lines, fn line ->
+      spt = String.split(String.trim(line), ~r/\s+/)
+      nums = Enum.slice(spt, 1, length(spt)-1)
+      num = Enum.join(nums)
+      {res, _} = Integer.parse(num)
+      res
+    end)
+
+    [time, dist] = parsed
+    possible = 0..time
+    Enum.filter(possible, fn t ->
+      ms = t
+      remaining = time - t
+      total_dist = remaining*ms
+      total_dist > dist
+    end) |> length
   end
 end
