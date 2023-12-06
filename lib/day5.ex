@@ -43,17 +43,20 @@ defmodule Day5 do
     end)
 
     process_map = fn(seed, map) ->
-      Enum.filter(map, fn [_,s,l] ->
-
-      end)
+      case Enum.filter(map, fn [_,s,l] ->
+        seed in s..(s+l-1)
+      end) do
+        [] -> seed
+        [[d,s,_]] -> seed-s+d
+      end
     end
 
-    Enum.map(seeds, fn seed ->
+    soils = Enum.map(seeds, fn seed ->
       Enum.reduce(rolled_maps, seed, fn map, acc ->
-
+        process_map.(acc, map)
       end)
     end)
 
-    IO.puts(inspect rolled_maps)
+    Enum.min(soils)
   end
 end
