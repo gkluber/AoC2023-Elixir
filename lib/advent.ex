@@ -23,17 +23,25 @@ defmodule Advent do
 
     num_days = length(lines_sets)
 
-    modules = [Day1, Day2, Day3, Day4, Day5, Day6]
+    modules = [Day1, Day2, Day3, Day4, Day5, Day6, Day7, Day8]
     indexed_modules = Enum.zip([0..(num_days-1), modules, lines_sets])
 
     # Run the input data on functions of each day
     Enum.each(indexed_modules, fn {idx, module, lines} ->
       Enum.each(module.__info__(:functions), fn {func, _nargs} ->
         try do
-          answer = apply(module, func, [lines])
-          IO.puts("Day " <> Integer.to_string(idx+1) <> " " <> to_string(func) <> ": " <> Integer.to_string(answer))
+          func_name = "#{func}"
+          if String.starts_with?(func_name, "solution") do
+            answer = apply(module, func, [lines])
+            IO.puts("Day #{idx+1} #{func_name}: #{answer}")
+          end
         rescue
-          _ -> :error
+          e in _ -> IO.puts("An error occurred in Day#{idx+1}/#{func}: #{inspect e}")
+          try do
+            IO.puts(e.message)
+          rescue
+            KeyError -> :error
+          end
         end
       end)
     end)
