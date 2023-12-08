@@ -18,16 +18,16 @@ defmodule Day7 do
     groups = Enum.frequencies_by(hand, &card_to_num(&1))
     {max_card, max_of_kind} = Enum.max(groups, fn {k1,v1}, {k2, v2} ->
       case v1 == v2 do
-        false -> v1 < v2
-        true -> k1 < k2
+        false -> v1 > v2
+        true -> k1 > k2
       end
     end)
 
     {high_card, _} = Enum.max(groups, fn {k1,_}, {k2,_} ->
-      k1 < k2
+      k1 > k2
     end)
 
-    IO.puts("#{max_of_kind} & #{high_card} -- #{inspect groups}")
+    #IO.puts("#{max_of_kind} & #{high_card} -- #{inspect groups}")
 
     other_card = if max_of_kind != 5 do
       {other_card, _} = Enum.at(Enum.drop_while(groups, fn {k,_} ->
@@ -42,13 +42,16 @@ defmodule Day7 do
     case max_of_kind do
       0 -> raise("Error.. shouldn't be 0 groups");
       1 -> max_card                         # high card
-      2 -> max_card * 14 + high_card        # one pair
-      3 -> case map_size(groups) do
-        1 -> max_card * 14**2               # 3 of kind
-        2 -> max_card * 14**3 + other_card  # full house
+      2 -> case map_size(groups) do
+        4 -> max_card * 14 + high_card      # one pair
+        3 -> max_card * 14**2               # two pair
       end
-      4 -> max_card * 14**4 + other_card    # 4 of a kind
-      5 -> max_card * 14**5                 # 5 of a kind
+      3 -> case map_size(groups) do
+        3 -> max_card * 14**3               # 3 of kind
+        2 -> max_card * 14**4 + other_card  # full house
+      end
+      4 -> max_card * 14**5 + other_card    # 4 of a kind
+      5 -> max_card * 14**6                 # 5 of a kind
       _ -> raise("Something's wrong")
     end
   end
