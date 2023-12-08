@@ -15,6 +15,8 @@ Run the following command to install dependencies:
 mix do deps.get, deps.compile
 ```
 
+This repository uses Nimble Parsec as its parsing library, but otherwise primarily relies on the standard libraries of Elixir and Erlang
+
 To run the code, use the following command:
 ```bash
 mix run
