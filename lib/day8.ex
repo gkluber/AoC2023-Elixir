@@ -72,8 +72,6 @@ defmodule Day8 do
       end)
     end)
 
-    IO.puts(inspect cycles)
-
     answer = Enum.reduce(cycles, 1, fn x, acc ->
       lcm(x,acc)
     end)
