@@ -17,13 +17,14 @@ defmodule Advent do
     IO.puts(inspect files_and_days)
 
     # Sort based on that number
-    Enum.sort(files_and_days, fn {_path, num}, {_path2, num2} -> num < num2 end)
-    sorted = Enum.map(files_and_days, fn {path, _day} -> path end)
+    sorted = Enum.sort(files_and_days, fn {_path, num}, {_path2, num2} -> num < num2 end)
+    sorted = Enum.map(sorted, fn {path, _day} -> path end)
+
     lines_sets = Enum.map(sorted, fn path -> File.read!(path) |> String.split(~r/\r?\n/) |> Enum.drop(-1) end)
 
     num_days = length(lines_sets)
 
-    modules = [Day1, Day2, Day3, Day4, Day5, Day6, Day7, Day8]
+    modules = [Day1, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10]
     indexed_modules = Enum.zip([0..(num_days-1), modules, lines_sets])
 
     # Run the input data on functions of each day
