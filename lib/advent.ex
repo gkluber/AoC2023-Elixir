@@ -30,19 +30,23 @@ defmodule Advent do
     # Run the input data on functions of each day
     Enum.each(indexed_modules, fn {idx, module, lines} ->
       Enum.each(module.__info__(:functions), fn {func, _nargs} ->
-        try do
-          func_name = "#{func}"
-          if String.starts_with?(func_name, "solution") do
-            answer = apply(module, func, [lines])
-            IO.puts("Day #{idx+1} #{func_name}: #{answer}")
-          end
-        rescue
-          e in _ -> IO.puts("An error occurred in Day#{idx+1}/#{func}: #{inspect e}")
-          try do
-            IO.puts(e.message)
-          rescue
-            KeyError -> :error
-          end
+        case module do
+          m when m in [Day15] ->
+            try do
+              func_name = "#{func}"
+              if String.starts_with?(func_name, "solution") do
+                answer = apply(module, func, [lines])
+                IO.puts("Day #{idx+1} #{func_name}: #{answer}")
+              end
+            rescue
+              e in _ -> IO.puts("An error occurred in Day#{idx+1}/#{func}: #{inspect e}")
+              try do
+                IO.puts(e.message)
+              rescue
+                KeyError -> :error
+              end
+            end
+          _ -> :continue
         end
       end)
     end)
