@@ -24,14 +24,14 @@ defmodule Advent do
 
     num_days = length(lines_sets)
 
-    modules = [Day1, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10, Day11, Day12, Day13, Day14, Day15]
+    modules = [Day1, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10, Day11, Day12, Day13, Day14, Day15, Day16, Day17, Day18]
     indexed_modules = Enum.zip([0..(num_days-1), modules, lines_sets])
 
     # Run the input data on functions of each day
     Enum.each(indexed_modules, fn {idx, module, lines} ->
       Enum.each(module.__info__(:functions), fn {func, _nargs} ->
         case module do
-          m when m in [Day15] ->
+          m when m in [Day15, Day16, Day17, Day18] ->
             try do
               func_name = "#{func}"
               if String.starts_with?(func_name, "solution") do
